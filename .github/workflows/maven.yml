@@ -37,11 +37,17 @@ jobs:
           java-version-file: '.java-version'
           cache: 'maven'
 
-      # Build and test (included in package)
+      # Build, test, and package into a JAR
       - name: Build with Maven and test
-        # Run non-interactive, package (with compile+test),
-        # ignore snapshot updates, because they are likely to have breaking changes, enforce checksums
-        run: mvn test --batch-mode --threads 2.0C --no-snapshot-updates --strict-checksums --file pom.xml
+        # Changed 'mvn test' to 'mvn package' to generate the JAR files
+        run: mvn package --batch-mode --threads 2.0C --no-snapshot-updates --strict-checksums --file pom.xml
+
+      # Upload the compiled FastLogin plugin files
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fastlogin-compiled-jars
+          path: "**/target/*.jar"
 
   dependency:
     runs-on: ubuntu-latest
