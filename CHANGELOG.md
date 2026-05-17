@@ -4,7 +4,7 @@
 
 * Use direct proxies instead of ssl factories for multiple IP-addresses
 * Remove local address check for multiple IP-addresses
-* Fix parsing of local IP-addresses
+* Fix parsing of local IP-addresse
 * Fix address rotating for contacting the Mojang API
 * Optimize issue template
 * Use Instant for timestamps
